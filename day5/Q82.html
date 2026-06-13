@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <input type="text" id="search" placeholder="Search...">
+
+<ul id="list"></ul>
+
+<script>
+    const items = [
+        "Apple",
+        "Banana",
+        "Mango",
+        "Orange",
+        "Pineapple",
+        "Grapes"
+    ];
+
+    const searchInput = document.getElementById("search");
+    const list = document.getElementById("list");
+
+    function debounce(fn, ms) {
+        let timer;
+
+        return (...args) => {
+            clearTimeout(timer);
+
+            timer = setTimeout(() => {
+                fn(...args);
+            }, ms);
+        };
+    }
+
+    function render(searchText = "") {
+        list.innerHTML = "";
+
+        items
+            .filter(item =>
+                item.toLowerCase().includes(
+                    searchText.toLowerCase()
+                )
+            )
+            .forEach(item => {
+                const li = document.createElement("li");
+
+                if (searchText) {
+                    const regex = new RegExp(
+                        `(${searchText})`,
+                        "gi"
+                    );
+
+                    li.innerHTML = item.replace(
+                        regex,
+                        '<b style="color:red">$1</b>'
+                    );
+                } else {
+                    li.textContent = item;
+                }
+
+                list.appendChild(li);
+            });
+    }
+
+    const handleSearch = debounce(() => {
+        render(searchInput.value);
+    }, 300);
+
+    searchInput.addEventListener("input", handleSearch);
+
+    render();
+</script>
+</body>
+</html>

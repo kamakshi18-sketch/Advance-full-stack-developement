@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Storage Wrapper</title>
+</head>
+<body>
+
+    <script>
+        class StorageWrapper {
+            set(key, value, ttlSeconds = null) {
+                const data = {
+                    value: value,
+                    expiry: ttlSeconds
+                        ? Date.now() + ttlSeconds * 1000
+                        : null
+                };
+
+                localStorage.setItem(
+                    key,
+                    JSON.stringify(data)
+                );
+            }
+
+            get(key) {
+                const item = localStorage.getItem(key);
+
+                if (!item) return null;
+
+                const data = JSON.parse(item);
+
+                if (
+                    data.expiry &&
+                    Date.now() > data.expiry
+                ) {
+                    localStorage.removeItem(key);
+                    return null;
+                }
+
+                return data.value;
+            }
+
+            remove(key) {
+                localStorage.removeItem(key);
+            }
+
+            clear() {
+                localStorage.clear();
+            }
+        }
+
+        const storage = new StorageWrapper();
+
+        storage.set("user", {
+            name: "Ram",
+            age: 20
+        }, 10);
+
+        console.log(storage.get("user"));
+
+    </script>
+
+</body>
+</html>

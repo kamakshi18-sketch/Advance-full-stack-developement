@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="content">
+    <h2>Hello</h2>
+    <p>Edit this DOM to test snapshots.</p>
+</div>
+
+<button id="changeBtn">Change Content</button>
+<button id="undoBtn">Undo</button>
+
+<script>
+    const snapshots = [];
+    const content = document.getElementById("content");
+
+    function takeSnapshot() {
+        snapshots.push(content.outerHTML);
+
+        if (snapshots.length > 10) {
+            snapshots.shift(); // oldest remove
+        }
+
+        console.log("Snapshot saved");
+    }
+
+    // Snapshot every 5 seconds
+    setInterval(takeSnapshot, 5000);
+
+    document
+        .getElementById("changeBtn")
+        .addEventListener("click", () => {
+            content.innerHTML =
+                "<h2>Updated!</h2><p>DOM changed.</p>";
+        });
+
+    document
+        .getElementById("undoBtn")
+        .addEventListener("click", () => {
+            if (snapshots.length < 2) return;
+
+            snapshots.pop(); // current state remove
+
+            const previous =
+                snapshots[snapshots.length - 1];
+
+            const temp = document.createElement("div");
+            temp.innerHTML = previous;
+
+            content.replaceWith(temp.firstElementChild);
+        });
+</script>
+</body>
+</html>

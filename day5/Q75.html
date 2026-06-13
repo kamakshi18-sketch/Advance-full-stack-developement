@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="toast-container"></div>
+
+<script>
+    const toast = {
+        show(message, type = "success", durationMs = 3000) {
+            const toastEl = document.createElement("div");
+
+            const colors = {
+                success: "green",
+                error: "red",
+                warning: "orange"
+            };
+
+            toastEl.style.cssText = `
+                background:${colors[type]};
+                color:white;
+                padding:10px;
+                margin:5px;
+                border-radius:5px;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+            `;
+
+            toastEl.textContent = message;
+
+            const closeBtn = document.createElement("button");
+            closeBtn.textContent = "X";
+
+            closeBtn.onclick = () => {
+                toastEl.remove();
+            };
+
+            toastEl.appendChild(closeBtn);
+
+            document
+                .getElementById("toast-container")
+                .appendChild(toastEl);
+
+            setTimeout(() => {
+                toastEl.remove();
+            }, durationMs);
+        }
+    };
+
+
+    toast.show("Saved Successfully!", "success", 3000);
+    toast.show("Something went wrong!", "error", 4000);
+    toast.show("Low Battery Warning!", "warning", 5000);
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tableContainer"></div>
+
+<script>
+    const data = [
+        { name: "Ram", age: 20, city: "Delhi" },
+        { name: "Shyam", age: 22, city: "Mumbai" },
+        { name: "Mohan", age: 25, city: "Jaipur" }
+    ];
+
+    const table = document.createElement("table");
+    table.border = "1";
+
+    const headerRow = document.createElement("tr");
+
+    ["Name", "Age", "City"].forEach(text => {
+        const th = document.createElement("th");
+        th.textContent = text;
+        headerRow.appendChild(th);
+    });
+
+    table.appendChild(headerRow);
+
+    data.forEach(person => {
+        const row = document.createElement("tr");
+
+        const nameCell = document.createElement("td");
+        nameCell.textContent = person.name;
+
+        const ageCell = document.createElement("td");
+        ageCell.textContent = person.age;
+
+        const cityCell = document.createElement("td");
+        cityCell.textContent = person.city;
+
+        row.appendChild(nameCell);
+        row.appendChild(ageCell);
+        row.appendChild(cityCell);
+
+        table.appendChild(row);
+    });
+
+    document
+        .getElementById("tableContainer")
+        .appendChild(table);
+</script>
+</body>
+</html>

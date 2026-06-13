@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="myForm">
+        <div>
+            <label>Name:</label>
+            <input type="text" id="name">
+            <span id="nameError" class="error"></span>
+        </div>
+
+        <br>
+
+        <div>
+            <label>Email:</label>
+            <input type="text" id="email">
+            <span id="emailError" class="error"></span>
+        </div>
+
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const form = document.getElementById("myForm");
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+
+            document.getElementById("nameError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+
+            let isValid = true;
+
+            if (name === "") {
+                document.getElementById("nameError").textContent =
+                    "Name is required";
+                isValid = false;
+            }
+
+            if (!email.includes("@")) {
+                document.getElementById("emailError").textContent =
+                    "Enter a valid email";
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Form Submitted Successfully!");
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="text">
+    Hello, this text will be copied.
+</p>
+
+<button id="copyBtn">
+    Copy to Clipboard
+</button>
+
+<script>
+    const btn = document.getElementById("copyBtn");
+    const text = document.getElementById("text").textContent;
+
+    btn.addEventListener("click", async () => {
+        try {
+            await navigator.clipboard.writeText(text);
+
+            btn.textContent = "Copied! ✓";
+
+            setTimeout(() => {
+                btn.textContent = "Copy to Clipboard";
+            }, 2000);
+
+        } catch (error) {
+            // Fallback
+            const textarea = document.createElement("textarea");
+
+            textarea.value = text;
+            document.body.appendChild(textarea);
+
+            textarea.select();
+
+            try {
+                document.execCommand("copy");
+
+                btn.textContent = "Copied! ✓";
+
+                setTimeout(() => {
+                    btn.textContent = "Copy to Clipboard";
+                }, 2000);
+
+            } catch {
+                alert("Copy permission denied.");
+            }
+
+            document.body.removeChild(textarea);
+        }
+    });
+</script>
+</body>
+</html>

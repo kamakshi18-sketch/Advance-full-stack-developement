@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Storage Counters</title>
+</head>
+<body>
+
+    <h2>Session Storage Counter</h2>
+    <p id="sessionCount"></p>
+
+    <h2>Local Storage Counter</h2>
+    <p id="localCount"></p>
+
+    <button id="btn">Increase Counters</button>
+
+    <script>
+        let sessionCounter =
+            Number(sessionStorage.getItem("sessionCounter")) || 0;
+
+        let localCounter =
+            Number(localStorage.getItem("localCounter")) || 0;
+
+        const sessionEl = document.getElementById("sessionCount");
+        const localEl = document.getElementById("localCount");
+
+        function updateUI() {
+            sessionEl.textContent = sessionCounter;
+            localEl.textContent = localCounter;
+        }
+
+        updateUI();
+
+        document.getElementById("btn").addEventListener("click", () => {
+            sessionCounter++;
+            localCounter++;
+
+            sessionStorage.setItem("sessionCounter", sessionCounter);
+            localStorage.setItem("localCounter", localCounter);
+
+            updateUI();
+        });
+    </script>
+
+</body>
+</html>

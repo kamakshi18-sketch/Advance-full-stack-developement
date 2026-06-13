@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"
+     style="height:400px; overflow-y:auto; border:1px solid black;">
+    <div id="spacer"></div>
+</div>
+
+<script>
+    const TOTAL_ITEMS = 10000;
+    const ITEM_HEIGHT = 30;
+    const VISIBLE_COUNT = 15;
+
+    const container = document.getElementById("container");
+    const spacer = document.getElementById("spacer");
+
+    spacer.style.height =
+        TOTAL_ITEMS * ITEM_HEIGHT + "px";
+
+    function render() {
+        const start =
+            Math.floor(container.scrollTop / ITEM_HEIGHT);
+
+        const end =
+            Math.min(
+                start + VISIBLE_COUNT,
+                TOTAL_ITEMS
+            );
+
+        container
+            .querySelectorAll(".item")
+            .forEach(el => el.remove());
+
+        for (let i = start; i < end; i++) {
+            const div = document.createElement("div");
+
+            div.className = "item";
+            div.textContent = `Item ${i + 1}`;
+
+            div.style.position = "absolute";
+            div.style.top =
+                i * ITEM_HEIGHT + "px";
+
+            div.style.height =
+                ITEM_HEIGHT + "px";
+
+            div.style.left = "0";
+            div.style.right = "0";
+
+            container.appendChild(div);
+        }
+    }
+
+    container.style.position = "relative";
+
+    container.addEventListener("scroll", render);
+
+    render();
+</script>
+</body>
+</html>

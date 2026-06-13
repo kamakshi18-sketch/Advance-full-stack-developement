@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Gallery</title>
+    <style>
+        img {
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        #preview {
+            width: 500px;
+            height: 300px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .thumb {
+            width: 100px;
+            height: 70px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Image Gallery</h2>
+
+    <img id="preview" src="https://picsum.photos/id/1015/500/300">
+
+    <br>
+
+    <button id="prev">Prev</button>
+    <button id="next">Next</button>
+
+    <br><br>
+
+    <div id="thumbnails">
+        <img class="thumb" src="https://picsum.photos/id/1015/100/70">
+        <img class="thumb" src="https://picsum.photos/id/1016/100/70">
+        <img class="thumb" src="https://picsum.photos/id/1018/100/70">
+        <img class="thumb" src="https://picsum.photos/id/1020/100/70">
+    </div>
+
+    <script>
+        const images = [
+            "https://picsum.photos/id/1015/500/300",
+            "https://picsum.photos/id/1016/500/300",
+            "https://picsum.photos/id/1018/500/300",
+            "https://picsum.photos/id/1020/500/300"
+        ];
+
+        let currentIndex = 0;
+
+        const preview = document.getElementById("preview");
+        const thumbs = document.querySelectorAll(".thumb");
+
+        function showImage(index) {
+            preview.src = images[index];
+        }
+
+        thumbs.forEach((thumb, index) => {
+            thumb.addEventListener("click", () => {
+                currentIndex = index;
+                showImage(currentIndex);
+            });
+        });
+
+        document.getElementById("next").addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        });
+
+        document.getElementById("prev").addEventListener("click", () => {
+            currentIndex =
+                (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight") {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            }
+
+            if (e.key === "ArrowLeft") {
+                currentIndex =
+                    (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+            }
+        });
+    </script>
+
+</body>
+</html>

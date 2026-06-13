@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="list"></div>
+
+<div id="spinner" style="display:none">
+    Loading...
+</div>
+
+<div id="sentinel"></div>
+
+<script>
+    const list = document.getElementById("list");
+    const spinner = document.getElementById("spinner");
+
+    let page = 1;
+
+    async function fetchData() {
+        spinner.style.display = "block";
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 1000)
+        );
+
+        for (let i = 1; i <= 10; i++) {
+            const div = document.createElement("div");
+            div.textContent =
+                `Item ${(page - 1) * 10 + i}`;
+            list.appendChild(div);
+        }
+
+        page++;
+        spinner.style.display = "none";
+    }
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            if (entries[0].isIntersecting) {
+                fetchData();
+            }
+        },
+        {
+            rootMargin: "150px"
+        }
+    );
+
+    observer.observe(
+        document.getElementById("sentinel")
+    );
+
+    fetchData();
+</script>
+</body>
+</html>

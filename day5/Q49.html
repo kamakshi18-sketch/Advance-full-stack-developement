@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img
+    class="lazy-img"
+    src="https://via.placeholder.com/300x200?text=Loading..."
+    data-src="https://picsum.photos/300/200"
+    style="filter: blur(5px);"
+>
+
+<script>
+    const images = document.querySelectorAll(".lazy-img");
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+
+            const img = entry.target;
+
+            img.src = img.dataset.src;
+
+            img.onload = () => {
+                img.style.filter = "blur(0)";
+            };
+
+            observer.unobserve(img);
+        });
+    });
+
+    images.forEach(img => observer.observe(img));
+</script>
+</body>
+</html>

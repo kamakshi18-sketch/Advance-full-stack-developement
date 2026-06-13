@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mutation Observer</title>
+</head>
+<body>
+
+    <div id="container"></div>
+
+    <button id="addBtn">Add Tracked Node</button>
+    <button id="stopBtn">Stop Observer</button>
+
+    <script>
+        const container = document.getElementById("container");
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    if (
+                        node.nodeType === 1 &&
+                        node.hasAttribute("data-track")
+                    ) {
+                        console.log("Tracked Node Added:", node);
+                    }
+                });
+            });
+        });
+
+        observer.observe(container, {
+            childList: true
+        });
+
+        document.getElementById("addBtn").addEventListener("click", () => {
+            const div = document.createElement("div");
+            div.textContent = "New Item";
+            div.setAttribute("data-track", "true");
+
+            container.appendChild(div);
+        });
+
+        document.getElementById("stopBtn").addEventListener("click", () => {
+            observer.disconnect();
+            console.log("Observer Stopped");
+        });
+    </script>
+
+</body>
+</html>

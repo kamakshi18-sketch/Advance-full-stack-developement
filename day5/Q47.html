@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Open Console</h2>
+<div id="box" style="width:300px;height:200px;border:1px solid black;">
+    Move Mouse Here
+</div>
+
+<script>
+    function debounce(fn, ms) {
+        let timer;
+
+        return function (...args) {
+            clearTimeout(timer);
+
+            timer = setTimeout(() => {
+                fn(...args);
+            }, ms);
+        };
+    }
+
+    function throttle(fn, ms) {
+        let lastTime = 0;
+
+        return function (...args) {
+            const now = Date.now();
+
+            if (now - lastTime >= ms) {
+                lastTime = now;
+                fn(...args);
+            }
+        };
+    }
+
+    const resizeHandler = debounce(() => {
+        console.log("Debounce: Resize stopped for 300ms");
+    }, 300);
+
+    const mouseMoveHandler = throttle(() => {
+        console.log("Throttle: Mouse moving");
+    }, 300);
+
+    window.addEventListener("resize", resizeHandler);
+
+    document
+        .getElementById("box")
+        .addEventListener("mousemove", mouseMoveHandler);
+</script>
+</body>
+</html>

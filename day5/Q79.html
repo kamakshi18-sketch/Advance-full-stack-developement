@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" class="card">
+    <h2>Hello</h2>
+    <p>This is a demo element.</p>
+</div>
+
+<div class="item">Item 1</div>
+<div class="item">Item 2</div>
+
+<div id="inspector"></div>
+
+<style>
+    #inspector {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: black;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .highlight {
+        outline: 2px solid red;
+    }
+</style>
+
+<script>
+    const panel = document.getElementById("inspector");
+
+    let previousElement = null;
+
+    document.addEventListener("mouseover", (e) => {
+        const el = e.target;
+
+        if (previousElement) {
+            previousElement.classList.remove("highlight");
+        }
+
+        el.classList.add("highlight");
+        previousElement = el;
+
+        panel.innerHTML = `
+            <b>Tag:</b> ${el.tagName}<br>
+            <b>ID:</b> ${el.id || "None"}<br>
+            <b>Classes:</b> ${el.className || "None"}<br>
+            <b>innerHTML Length:</b> ${el.innerHTML.length}
+        `;
+    });
+</script>
+</body>
+</html>

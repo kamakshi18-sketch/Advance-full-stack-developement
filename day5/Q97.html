@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"
+     style="width:200px;height:100px;border:1px solid black;resize:both;overflow:auto;">
+    Resize Me
+</div>
+
+<p id="dimensions"></p>
+
+<button id="removeBtn">Remove Element</button>
+
+<script>
+    const box = document.getElementById("box");
+    const dimensions = document.getElementById("dimensions");
+
+    const observer = new ResizeObserver((entries) => {
+        const entry = entries[0];
+
+        dimensions.textContent =
+            `Width: ${Math.round(entry.contentRect.width)}px, ` +
+            `Height: ${Math.round(entry.contentRect.height)}px`;
+    });
+
+    observer.observe(box);
+
+    document.getElementById("removeBtn")
+        .addEventListener("click", () => {
+            box.remove();
+            observer.disconnect();
+
+            dimensions.textContent =
+                "Observer Disconnected";
+        });
+</script>
+</body>
+</html>
