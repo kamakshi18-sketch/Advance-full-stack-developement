@@ -392,7 +392,7 @@ setInterval(() => {
     console.log(images[index]);
     index = (index + 1) % images.length;
 }, 3000);
-Q35 Typing Effect
+//35 Typing Effect
 let text = "Hello World";
 let i = 0;
 let typing = setInterval(() => {
