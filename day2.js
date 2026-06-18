@@ -412,6 +412,3 @@ console.log(totalRevenue);
 console.log(averageRevenue);
 console.log(highestOrder);
 console.log(orderIds);
-
-
-
