@@ -2,38 +2,31 @@
 async function helloWorld() {
   return "Hello World";
 }
-helloWorld().then(result => console.log("Q1:", result));
+helloWorld().then(result => console.log(result));
 
 
 // Q2
-async function getUser() {
+async function getUser2() {
   return {
     name: "Ram",
     age: 20
   };
 }
-getUser().then(result => console.log("Q2:", result));
+getUser2().then(result => console.log(result));
 
 
 // Q3
 async function getProducts() {
   return ["Laptop", "Phone", "Watch"];
 }
-getProducts().then(result => console.log("Q3:", result));
-
-
-// Q4
-async function getCurrentDate() {
-  return new Date().toDateString();
-}
-getCurrentDate().then(result => console.log("Q4:", result));
+getProducts().then(result => console.log(result));
 
 
 // Q5
 async function getRandomNumber() {
   return Math.floor(Math.random() * 100);
 }
-getRandomNumber().then(result => console.log("Q5:", result));
+getRandomNumber().then(result => console.log(result));
 
 
 // Q6
@@ -43,7 +36,7 @@ async function getStudent() {
     course: "BCA"
   };
 }
-getStudent().then(result => console.log("Q6:", result));
+getStudent().then(result => console.log(result));
 
 
 // Q7
@@ -53,37 +46,30 @@ async function getCompany() {
     location: "India"
   };
 }
-getCompany().then(result => console.log("Q7:", result));
+getCompany().then(result => console.log(result));
 
 
 // Q8
 async function getCartItems() {
   return ["Shoes", "Bag", "Watch"];
 }
-getCartItems().then(result => console.log("Q8:", result));
+getCartItems().then(result => console.log(result));
 
 
 // Q9
 async function getTotalAmount() {
   return 2500;
 }
-getTotalAmount().then(result => console.log("Q9:", result));
-
-
-// Q10
-async function checkPromise() {
-  return "Hello";
-}
-console.log("Q10:", checkPromise() instanceof Promise);
+getTotalAmount().then(result => console.log(result));
 
 
 // Q11
-async function getUser() {
+async function getUser11() {
   return { name: "Ram", age: 20 };
 }
 async function showUser() {
-  const user = await getUser();
-  console.log("Q11:", user);
+  const user = await getUser11();
+  console.log(user);
 }
 showUser();
 
@@ -94,7 +80,7 @@ async function getProduct() {
 }
 async function showProduct() {
   const product = await getProduct();
-  console.log("Q12:", product);
+  console.log(product);
 }
 showProduct();
 
@@ -105,7 +91,7 @@ async function getOrders() {
 }
 async function showOrders() {
   const orders = await getOrders();
-  console.log("Q13:", orders);
+  console.log(orders);
 }
 showOrders();
 
@@ -116,7 +102,7 @@ async function getPayment() {
 }
 async function showPayment() {
   const payment = await getPayment();
-  console.log("Q14:", payment);
+  console.log(payment);
 }
 showPayment();
 
@@ -127,25 +113,31 @@ function wait(ms) {
     setTimeout(resolve, ms);
   });
 }
-wait(2000).then(() => console.log("Q15: Waited 2 seconds"));
+wait(2000).then(() => console.log("Waited 2 seconds"));
 
+
+function wait(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
 
 // Q16
 async function startEnd() {
-  console.log("Q16: Start");
+  console.log("Start");
   await wait(2000);
-  console.log("Q16: End");
+  console.log("End");
 }
 startEnd();
 
 
 // Q17
 async function printNumbers() {
-  console.log("Q17:", 1);
+  console.log(1);
   await wait(1000);
-  console.log("Q17:", 2);
+  console.log(2);
   await wait(1000);
-  console.log("Q17:", 3);
+  console.log(3);
 }
 printNumbers();
 
@@ -154,7 +146,7 @@ printNumbers();
 async function greeting() {
   await wait(1000);
 
-  console.log("Q18: Welcome Ram");
+  console.log("Welcome Ram");
 }
 greeting();
 
@@ -163,14 +155,14 @@ greeting();
 async function generateError() {
   throw new Error("Something went wrong");
 }
-async function runQ21() {
+async function run21() {
   try {
     await generateError();
   } catch (error) {
-    console.log("Q21:", error.message);
+    console.log(error.message);
   }
 }
-runQ21();
+run21();
 
 
 // Q23
@@ -180,15 +172,15 @@ async function withdraw(balance, amount) {
   }
   return "Withdrawal Successful";
 }
-async function runQ23() {
+async function run23() {
   try {
     const result = await withdraw(5000, 2000);
-    console.log("Q23:", result);
+    console.log(result);
   } catch (error) {
-    console.log("Q23:", error.message);
+    console.log(error.message);
   }
 }
-runQ23();
+run23();
 
 
 // Q24
@@ -198,33 +190,15 @@ async function paymentGateway(amount) {
   }
   return "Payment Successful";
 }
-async function runQ24() {
+async function run24() {
   try {
     const result = await paymentGateway(1000);
-    console.log("Q24:", result);
+    console.log(result);
   } catch (error) {
-    console.log("Q24:", error.message);
+    console.log(error.message);
   }
 }
-runQ24();
-
-
-// Q25
-async function register(name) {
-  if (!name) {
-    throw new Error("Name Required");
-  }
-  return "Registration Successful";
-}
-async function runQ25() {
-  try {
-    const result = await register("Ram");
-    console.log("Q25:", result);
-  } catch (error) {
-    console.log("Q25:", error.message);
-  }
-}
-runQ25();
+run24();
 
 
 // Q27
@@ -234,15 +208,15 @@ async function validatePassword(password) {
   }
   return "Strong Password";
 }
-async function runQ27() {
+async function run27() {
   try {
     const result = await validatePassword("abc123");
-    console.log("Q27:", result);
+    console.log(result);
   } catch (error) {
-    console.log("Q27:", error.message);
+    console.log(error.message);
   }
 }
-runQ27();
+run27();
 
 
 // Q28
@@ -253,15 +227,15 @@ async function atm(balance, amount) {
 
   return "Cash Withdrawn";
 }
-async function runQ28() {
+async function run28() {
   try {
     const result = await atm(10000, 3000);
-    console.log("Q28:", result);
+    console.log(result);
   } catch (error) {
-    console.log("Q28:", error.message);
+    console.log(error.message);
   }
 }
-runQ28();
+run28();
 
 
 // Q29
@@ -271,15 +245,15 @@ async function buyProduct(stock) {
   }
   return "Product Purchased";
 }
-async function runQ29() {
+async function run29() {
   try {
     const result = await buyProduct(5);
-    console.log("Q29:", result);
+    console.log(result);
   } catch (error) {
-    console.log("Q29:", error.message);
+    console.log(error.message);
   }
 }
-runQ29();
+run29();
 
 
 // Q31
@@ -340,7 +314,7 @@ async function fetchAllData() {
     Promise.resolve(["Laptop", "Phone"]),
     Promise.resolve(["Order1", "Order2"])
   ]);
-  console.log("Q36:", result);
+  console.log(result);
 }
 fetchAllData();
 
@@ -354,7 +328,7 @@ async function fetchFiveApis() {
     Promise.resolve("API4"),
     Promise.resolve("API5")
   ]);
-  console.log("Q37:", result);
+  console.log(result);
 }
 fetchFiveApis();
 
@@ -367,7 +341,7 @@ async function dashboardLoader() {
     Promise.resolve("Products"),
     Promise.resolve("Notifications")
   ]);
-  console.log("Q38:", result);
+  console.log(result);
 }
 dashboardLoader();
 
@@ -379,7 +353,7 @@ async function imageGallery() {
     Promise.resolve("Image2"),
     Promise.resolve("Image3")
   ]);
-  console.log("Q39:", result);
+  console.log(result);
 }
 imageGallery();
 
@@ -391,7 +365,7 @@ async function fileDownloader() {
     Promise.resolve("File2"),
     Promise.resolve("File3")
   ]);
-  console.log("Q40:", result);
+  console.log(result);
 }
 fileDownloader();
 
@@ -405,7 +379,7 @@ async function allSettledDemo() {
     Promise.reject("API4 Failed"),
     Promise.reject("API5 Failed")
   ]);
-  console.log("Q41:", result);
+  console.log(result);
 }
 allSettledDemo();
 
@@ -417,7 +391,7 @@ async function adminDashboard() {
     Promise.reject("Reports Error"),
     Promise.resolve("Orders")
   ]);
-  console.log("Q42:", result);
+  console.log(result);
 }
 adminDashboard();
 
@@ -429,7 +403,7 @@ async function batchUpload() {
     Promise.reject("File2 Failed"),
     Promise.resolve("File3 Uploaded")
   ]);
-  console.log("Q43:", result);
+  console.log(result);
 }
 batchUpload();
 
@@ -441,7 +415,7 @@ async function studentResults() {
     Promise.reject("Shyam Fail"),
     Promise.resolve("Mohan Pass")
   ]);
-  console.log("Q44:", result);
+  console.log(result);
 }
 studentResults();
 
@@ -453,21 +427,25 @@ async function fastestServer() {
     new Promise(resolve => setTimeout(() => resolve("Server2"), 1000)),
     new Promise(resolve => setTimeout(() => resolve("Server3"), 2000))
   ]);
-  console.log("Q45:", result);
+  console.log(result);
 }
 fastestServer();
 
 
-// Q46
+// // Q46
 async function firstSuccess() {
-  const result = await Promise.any([
-    Promise.reject("Server1 Failed"),
-    Promise.reject("Server2 Failed"),
-    Promise.resolve("Server3 Success")
-  ]);
-  console.log("Q46:", result);
+  try {
+    const result = await Promise.any([
+      Promise.reject("Server1 Failed"),
+      Promise.reject("Server2 Failed"),
+      Promise.resolve("Server3 Success")
+    ]);
+
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
 }
-firstSuccess();
 
 
 // Q48
@@ -478,7 +456,7 @@ async function* names() {
 }
 async function showNames() {
   for await (const name of names()) {
-    console.log("Q48:", name);
+    console.log(name);
   }
 }
 showNames();
